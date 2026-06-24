@@ -18,8 +18,8 @@ if [ ! -x "$BIN" ]; then
   exit 1
 fi
 
-MODEL=$(python -c 'import json; print(json.load(open("models/active.json"))["primary_model"])')
-THREADS=$(python -c 'import json; hw=json.load(open("hardware.json")); print(hw["cpu"].get("cores_physical") or 4)')
+MODEL=$(python3 -c 'import json; print(json.load(open("models/active.json"))["primary_model"])')
+THREADS=$(python3 -c 'import json; hw=json.load(open("hardware.json")); print(hw["cpu"].get("cores_physical") or 4)')
 NGL="${LAB_N_GPU_LAYERS:-99}"
 PARALLEL="${LAB_PARALLEL:-4}"
 CTX="${LAB_N_CTX:-2048}"

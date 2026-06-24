@@ -79,6 +79,10 @@ def main() -> int:
     out_dir = Path("models")
     out_dir.mkdir(exist_ok=True)
 
+    repo_id_compare = repo_id
+    if tier_key == "Llama-3.2-3B-Instruct":
+        repo_id_compare = "tensorblock/Llama-3.2-3B-Instruct-GGUF"
+
     if args.skip_download:
         primary = find_existing(out_dir, q4_file)
         compare = find_existing(out_dir, q2_file)
@@ -97,7 +101,7 @@ def main() -> int:
         print(f"    -> {primary}")
 
         print(f"==> Downloading {tier_key} ({q2_file}) — for quantization comparison")
-        compare = Path(hf_hub_download(repo_id=repo_id, filename=q2_file, local_dir=str(out_dir)))
+        compare = Path(hf_hub_download(repo_id=repo_id_compare, filename=q2_file, local_dir=str(out_dir)))
         print(f"    -> {compare}")
 
     config = {
